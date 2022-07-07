@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+}
+
+#display {
+  position: fixed;
+  width: 1920px;
+  height: 515px;
+  background-color: rgb(255, 240, 240);
+}
+
+.row {
+  background-color: rgb(255, 224, 224);
+}
+
+.key {
+  display: inline-block;
+  background-color: rgba(255, 207, 207);
+}
