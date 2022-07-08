@@ -1,6 +1,7 @@
 // parameters
 let margin = 10
 let radius
+let spread = 1
 
 // state
 let rowCount = 0
@@ -10,11 +11,11 @@ let run = () => {
 }
 
 let testFullFiveRows = () => {
-  // x = row height
-  let x = (515 - 6*margin)/5
+  let y = (515 - 6*margin)/5 // row height
+  let x = y*spread           // baseline key width
 
   // corner rounding
-  radius = 0.15*x
+  radius = 0.15*y
 
   // derivations
   xTab = 1.5*x
@@ -25,41 +26,40 @@ let testFullFiveRows = () => {
 
   // rows
   for (let i = 0; i < 5; i++)
-    row(x)
+    row(y)
   
   // r1
   for (let i = 0; i < 13; i++)
-    key(x, x, 'r1')
-  key(xTab, x, 'r1')
+    key(x, y, 1)
+  key(xTab, y, 1)
   
   // r2
-  key(xTab, x, 'r2')
+  key(xTab, y, 2)
   for (let i = 0; i < 13; i++)
-    key(x, x, 'r2')
+    key(x, y, 2)
   
   // r3
-  key(xRet, x, 'r3')
+  key(xRet, y, 3)
   for (let i = 0; i < 11; i++)
-    key(x, x, 'r3')
-  key(xRet, x, 'r3')
+    key(x, y, 3)
+  key(xRet, y, 3)
 
   // r4
-  key(xShf, x, 'r4')
+  key(xShf, y, 4)
   for (let i = 0; i < 10; i++)
-    key(x, x, 'r4')
-  key(xShf, x, 'r4')
+    key(x, y, 4)
+  key(xShf, y, 4)
 
   // r5
   for (let i = 0; i < 3; i++)
-    key(x, x, 'r5')
-  key(xCmd, x, 'r5')
-  key(xSpc, x, 'r5')
-  key(xCmd, x, 'r5')
+    key(x, y, 5)
+  key(xCmd, y, 5)
+  key(xSpc, y, 5)
+  key(xCmd, y, 5)
   for (let i = 0; i < 2; i++)
-    key(x, x, 'r5')
-  key(x, 0.45*x, 'r5')
-  key(x, 0.45*x, 'r5')
-  key(x, x, 'r5')
+    key(x, y, 5)
+  keyVertArrows(x, y, 5)
+  key(x, y, 5)
 }
 
 let row = (height) => {
@@ -76,7 +76,7 @@ let row = (height) => {
   d.append(r)
 }
 
-let key = (width, height, rowId) => {
+let key = (width, height, rowIdx) => {
   let k = document.createElement('div')
   k.className = 'key'
   k.style.width = width + 'px'
@@ -84,10 +84,35 @@ let key = (width, height, rowId) => {
   k.style.borderRadius = radius + 'px'
   k.style.marginRight = margin + 'px'
 
-  let r = document.getElementById(rowId)
+  let r = document.getElementById('r' + rowIdx)
   r.append(k)
 }
 
-let arrowUpDown = () => {
-  
+let keyVertArrows = (width, height, rowIdx) => {
+  let k = document.createElement('div')
+  k.style.display = 'inline-block'
+  k.style.marginRight = margin + 'px'
+  k.style.borderRadius = radius + 'px'
+
+  let up = document.createElement('div')
+  up.className = 'key'
+  up.style.display = 'block'
+  up.style.width = width + 'px'
+  up.style.height = (height - 2*margin/3)/2 + 'px'
+  up.style.borderRadius = radius + 'px ' + radius + 'px ' + radius/2 + 'px ' + radius/2 + 'px'
+
+  let sp = document.createElement('div')
+  sp.style.display = 'block'
+  up.style.width = width + 'px'
+  sp.style.height = 2*margin/3 + 'px'
+
+  let dn = up.cloneNode()
+  dn.style.borderRadius = radius/2 + 'px ' + radius/2 + 'px ' + radius + 'px ' + radius + 'px'
+
+  k.append(up)
+  k.append(sp)
+  k.append(dn)
+
+  let r = document.getElementById('r' + rowIdx)
+  r.append(k)
 }
