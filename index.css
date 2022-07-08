@@ -10,15 +10,11 @@ body {
 }
 
 .row {
-  background-color: rgb(255, 224, 224);
   text-align: center;
+  background-color: rgb(255, 224, 224);
 }
 
 .key {
   display: inline-block;
   background-color: rgba(255, 207, 207);
-}
-
-.key-row {
-  margin: auto;
 }
