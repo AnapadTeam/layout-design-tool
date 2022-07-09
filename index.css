@@ -1,20 +1,48 @@
 body {
+  font-family: 'Inter';
+  font-size: 10pt;
   margin: 0;
 }
 
+p {
+  display: inline;
+}
+
+#info {
+  width: 1920px;
+  height: 30pt;
+  color:rgb(255, 96, 96);
+}
+
+#meas-display {
+  float: left;
+  margin: 8pt 0 0 5pt;
+}
+
+.meas {
+  float: right;
+  display: inline;
+  margin: 8pt 0 0 12pt;
+}
+
+.label {
+  font-weight: 700;
+  margin: 0 5pt 0 0;
+}
+
 #display {
-  position: fixed;
   width: 1920px;
   height: 515px;
-  background-color: rgb(255, 240, 240);
+  background-color: rgb(255, 224, 224);
+  border: solid rgb(255, 96, 96) 3px;
 }
 
 .row {
   text-align: center;
-  background-color: rgb(255, 224, 224);
+  background-color: rgb(255, 204, 204);
 }
 
 .key {
   display: inline-block;
-  background-color: rgba(255, 207, 207);
+  background-color: rgba(255, 172, 172);
 }

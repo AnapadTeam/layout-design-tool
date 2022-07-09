@@ -2,16 +2,48 @@
 let margin = 10
 let radius
 let spread = 1
+let topHeight = 0.5
 
 // state
 let rowCount = 0
 
 let run = () => {
-  testFullFiveRows()
+  makeLayout()
+  writeInfo()
 }
 
-let testFullFiveRows = () => {
-  let y = (515 - 6*margin)/5 // row height
+let writeInfo = () => {
+  let r5 = document.getElementById('r2')
+  let rowHeight = parseFloat(getComputedStyle(r5).height).toFixed(2)
+  measurement('Top Row Height', topHeight*100 + '%')
+  measurement('Row Height', rowHeight + 'px')
+  measurement('Spread', spread)
+  measurement('Radius', (radius/rowHeight*100).toFixed() + '%')
+  measurement('Margin', margin + 'px')
+  measurement('BOE NV126B5M-N42', '1920&thinsp;×&thinsp;515')
+  info.lastElementChild.id = 'meas-display'
+}
+
+let measurement = (param, value) => {
+  let meas = document.createElement('div')
+  meas.className = 'meas'
+
+  let label = document.createElement('p')
+  label.className = 'label'
+  label.innerHTML = param
+
+  let data = document.createElement('p')
+  data.innerHTML = value
+
+  meas.append(label)
+  meas.append(data)
+
+  info.append(meas)
+}
+
+let makeLayout = () => {
+  let z = (515 - 6*margin)*((topHeight/(4 + topHeight)))
+  let y = (515 - 6*margin)*((4/(4 + topHeight)))/4 // baseline row height
   let x = y*spread           // baseline key width
 
   // corner rounding
@@ -25,13 +57,14 @@ let testFullFiveRows = () => {
   xSpc = 5*x + 4*margin
 
   // rows
-  for (let i = 0; i < 5; i++)
+  row(z)
+  for (let i = 0; i < 4; i++)
     row(y)
   
   // r1
   for (let i = 0; i < 13; i++)
-    key(x, y, 1)
-  key(xTab, y, 1)
+    key(x, z, 1)
+  key(xTab, z, 1)
   
   // r2
   key(xTab, y, 2)
