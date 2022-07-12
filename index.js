@@ -1,8 +1,8 @@
 // parameters
-let margin = 10
+let margin = 15
 let radius
-let spread = 1
-let topHeight = 0.5
+let spread = 1.05
+let topHeight = 1
 
 // state
 let rowCount = 0
@@ -15,12 +15,14 @@ let run = () => {
 let writeInfo = () => {
   let r5 = document.getElementById('r2')
   let rowHeight = parseFloat(getComputedStyle(r5).height).toFixed(2)
+
   measurement('Top Row Height', topHeight*100 + '%')
   measurement('Row Height', rowHeight + 'px')
   measurement('Spread', spread)
   measurement('Radius', (radius/rowHeight*100).toFixed() + '%')
   measurement('Margin', margin + 'px')
   measurement('BOE NV126B5M-N42', '1920&thinsp;×&thinsp;515')
+
   info.lastElementChild.id = 'meas-display'
 }
 
